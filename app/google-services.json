@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "189597995625",
+    "project_id": "kartotekaapp-v3",
+    "storage_bucket": "kartotekaapp-v3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189597995625:android:bb2d0921bf5d69750108f8",
+        "android_client_info": {
+          "package_name": "com.example.kartotekaapp_v3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189597995625-6barq76hnsuh8bnafdam334m3l586g84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN7ENKf3YwTIx7_Wn5MW3gkAEAPwcW9Wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189597995625-6barq76hnsuh8bnafdam334m3l586g84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

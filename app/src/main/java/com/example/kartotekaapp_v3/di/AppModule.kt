@@ -1,0 +1,45 @@
+package com.example.kartotekaapp_v3.di
+
+
+import com.example.kartotekaapp_v3.network.BASE_URL
+import com.example.kartotekaapp_v3.network.CompanyApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import com.google.gson.Gson
+import okhttp3.OkHttpClient
+
+import okhttp3.logging.HttpLoggingInterceptor
+
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
+import kotlin.text.Typography.dagger
+
+@Module
+@InstallIn (SingletonComponent:: class)
+object AppModule {
+
+    @Provides
+    fun baseUrl() = BASE_URL
+
+    @Provides
+    fun logging() = HttpLoggingInterceptor()
+        .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+    @Provides
+    fun okHttpClient() = OkHttpClient.Builder()
+        .addInterceptor(logging())
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(baseUrl: String): CompanyApi =
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient())
+            .build()
+            .create(CompanyApi::class.java)
+}
