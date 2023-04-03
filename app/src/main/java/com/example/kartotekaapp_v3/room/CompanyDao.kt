@@ -14,9 +14,9 @@ interface CompanyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favoriteCompanies: FavoriteCompanies)
 
-    @Query("DELETE * FROM companies WHERE companyId = : companyId")
-    suspend fun delete (companyId : String)
+    @Query("DELETE FROM companies WHERE companyId = :companyId")
+    suspend fun delete (companyId : String):Int
 
-    @Query("DELETE * FROM companies")
-    suspend fun deleteAllCompanies()
+    @Query("DELETE FROM companies")
+    suspend fun deleteAllCompanies():Int
 }
