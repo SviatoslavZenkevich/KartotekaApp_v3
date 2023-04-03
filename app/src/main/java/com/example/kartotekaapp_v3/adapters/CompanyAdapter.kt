@@ -1,18 +1,9 @@
 package com.example.kartotekaapp_v3.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.navArgument
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kartotekaapp_v3.R
 import com.example.kartotekaapp_v3.databinding.CompanyItemBinding
-import com.example.kartotekaapp_v3.fragments.CompanyListFragment
-import com.example.kartotekaapp_v3.fragments.CompanyListViewModel
 import com.example.kartotekaapp_v3.room.FavoriteCompanies
 
 

@@ -1,4 +1,4 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.fragments.firebase
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

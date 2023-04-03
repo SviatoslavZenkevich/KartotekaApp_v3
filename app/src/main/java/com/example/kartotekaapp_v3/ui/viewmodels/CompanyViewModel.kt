@@ -1,4 +1,4 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -24,40 +24,19 @@ class CompanyViewModel(application: Application) : AndroidViewModel(application)
         readAllData = repository.readAllData
     }
 
-//    fun insertCompany(unp: String, companyName: String) {
-//        val company = FavoriteCompanies(null, unp, companyName)
-//        viewModelScope.launch {
-//            companyDao.insert(company)
-//        }
-//    }
+
     fun addCompany(favoriteCompanies: FavoriteCompanies) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addToFavorite(favoriteCompanies)
         }
     }
-    fun deleteFavoriteCompany(favoriteCompanies: String) {
+    fun deleteFavoriteCompany(companyId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteFromFavorite(favoriteCompanies)
+            repository.deleteFromFavorite(companyId)
         }
     }
 
-    fun deleteAllCompanies() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllFavorite()
-        }
-    }
-}
+   }
 
 
 
-//class CompanyViewModel(private val repository: CompanyRepository) : ViewModel() {
-//    init {
-//        getSavedCompanies()
-//    }
-//
-//    fun getSavedCompanies() = viewModelScope.launch(Dispatchers.IO) {
-//        val res = repository.getFavoriteCompanies()
-//        repository.getFavoriteCompanies()
-//    }
-//
-//}

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFE033"
-    tools:context=".fragments.SearchFragment" >
+    tools:context=".ui.fragments.firebase.SearchFragment" >
 
     <ImageView
         android:id="@+id/imageView"

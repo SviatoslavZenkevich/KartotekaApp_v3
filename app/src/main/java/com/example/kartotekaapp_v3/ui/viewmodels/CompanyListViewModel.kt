@@ -1,4 +1,4 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -25,13 +25,7 @@ class CompanyListViewModel(application: Application) : AndroidViewModel(applicat
         readAllData = repository.readAllData
     }
 
-    fun deleteFavoriteCompany(unp: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteFromFavorite(unp)
-        }
-    }
-
-    fun deleteAllCompanies(favoriteCompanies: FavoriteCompanies) {
+    fun deleteAllCompanies() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllFavorite()
         }

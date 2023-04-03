@@ -1,31 +1,25 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.fragments.comp_list_frag
 
-import android.location.GnssAntennaInfo.Listener
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.kartotekaapp_v3.R
 import com.example.kartotekaapp_v3.adapters.CompanyAdapter
-import com.example.kartotekaapp_v3.databinding.CompanyItemBinding
-import com.example.kartotekaapp_v3.databinding.FragmentCompanyBinding
 import com.example.kartotekaapp_v3.databinding.FragmentCompanyListBinding
 import com.example.kartotekaapp_v3.room.FavoriteCompanies
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.kartotekaapp_v3.ui.viewmodels.CompanyListViewModel
 
 class CompanyListFragment : Fragment(), CompanyAdapter.Listener {
     private lateinit var binding: FragmentCompanyListBinding
-    private lateinit var mCompanyViewModel: CompanyListViewModel
+    private lateinit var mCompanyListViewModel: CompanyListViewModel
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -34,6 +28,9 @@ class CompanyListFragment : Fragment(), CompanyAdapter.Listener {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCompanyListBinding.inflate(layoutInflater, container, false)
+
+        // Add menu
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -46,8 +43,8 @@ class CompanyListFragment : Fragment(), CompanyAdapter.Listener {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // CompanyListViewModel
-        mCompanyViewModel = ViewModelProvider(this).get(CompanyListViewModel::class.java)
-        mCompanyViewModel.readAllData.observe(viewLifecycleOwner, Observer { favoriteCompanies ->
+        mCompanyListViewModel = ViewModelProvider(this).get(CompanyListViewModel::class.java)
+        mCompanyListViewModel.readAllData.observe(viewLifecycleOwner, Observer { favoriteCompanies ->
             adapter.setData(favoriteCompanies)
         })
     }
@@ -87,8 +84,34 @@ class CompanyListFragment : Fragment(), CompanyAdapter.Listener {
         navController.navigate(R.id.companyDetailFragment, bundle)
 
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete){
+           deleteAllFav()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllFav() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+           mCompanyListViewModel.deleteAllCompanies()
+            Toast.makeText(
+                requireContext(),
+                "Successfully removed everything",
+                Toast.LENGTH_SHORT).show()
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Delete everything?")
+        builder.setMessage("Are you sure you want to delete everything?")
+        builder.create().show()
+    }
 }
+
+
 
 ////    private var onItemClickListener: ((FavoriteCompanies) -> Unit)? = null
 //

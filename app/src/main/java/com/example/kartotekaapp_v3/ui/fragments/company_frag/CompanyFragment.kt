@@ -1,4 +1,4 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.fragments.company_frag
 
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +15,7 @@ import com.example.kartotekaapp_v3.data.Company
 import com.example.kartotekaapp_v3.databinding.FragmentCompanyBinding
 import com.example.kartotekaapp_v3.network.CompanyApi
 import com.example.kartotekaapp_v3.room.FavoriteCompanies
+import com.example.kartotekaapp_v3.ui.viewmodels.CompanyViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

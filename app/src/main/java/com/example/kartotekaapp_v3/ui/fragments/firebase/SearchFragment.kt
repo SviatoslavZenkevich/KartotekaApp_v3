@@ -1,4 +1,4 @@
-package com.example.kartotekaapp_v3.fragments
+package com.example.kartotekaapp_v3.ui.fragments.firebase
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +9,8 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.kartotekaapp_v3.R
 import com.example.kartotekaapp_v3.databinding.FragmentSearchBinding
-import com.google.firebase.auth.FirebaseAuth
 
 class SearchFragment : Fragment() {
     private lateinit var navController: NavController
