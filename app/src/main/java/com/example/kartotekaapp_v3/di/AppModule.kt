@@ -1,13 +1,18 @@
 package com.example.kartotekaapp_v3.di
 
 
+import android.content.Context
+import androidx.room.Room
 import com.example.kartotekaapp_v3.network.BASE_URL
 import com.example.kartotekaapp_v3.network.CompanyApi
+import com.example.kartotekaapp_v3.room.CompanyDao
+import com.example.kartotekaapp_v3.room.CompanyDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import com.google.gson.Gson
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,4 +47,20 @@ object AppModule {
             .client(okHttpClient())
             .build()
             .create(CompanyApi::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideCompanyDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(
+            context,
+            CompanyDatabase::class.java,
+            "company_database"
+        ).build()
+
+//    @Provides
+//    @Singleton
+//    fun provideCompanyDao(appDatabase: CompanyDatabase): CompanyDao {
+//        return appDatabase.getCompanyDao()
+//    }
 }

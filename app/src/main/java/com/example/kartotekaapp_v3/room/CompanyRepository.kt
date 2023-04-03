@@ -1,34 +1,23 @@
 package com.example.kartotekaapp_v3.room
 
-import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import javax.inject.Inject
 
-//class CompanyRepository @Inject constructor(
-//
-//    private val companyDao: CompanyDao
-//) {
-//
-//
-//    fun getFavoriteCompanies() = companyDao.getAllCompanies()
-//    suspend fun insert(favoriteCompanies: FavoriteCompanies) =
-//        companyDao.insert(favoriteCompanies = favoriteCompanies)
-//
-//    suspend fun delete(favoriteCompanies: FavoriteCompanies) =
-//        companyDao.delete(favoriteCompanies = favoriteCompanies)
-//}
+class CompanyRepository(
+
+    private val companyDao: CompanyDao
+) {
+
+    val readAllData: LiveData<List<FavoriteCompanies>> = companyDao.readAllData()
 
 
-class CompanyRepository(private val companyDao: CompanyDao) {
+    suspend fun addToFavorite(favoriteCompanies: FavoriteCompanies) =
+        companyDao.insert(favoriteCompanies = favoriteCompanies)
 
-    val allCompanies: LiveData<List<FavoriteCompanies>> = companyDao.getAllCompanies()
+    suspend fun deleteFromFavorite(companyId: String) =
+        companyDao.delete(companyId)
 
-    suspend fun insert(favoriteCompanies: FavoriteCompanies) {
-        companyDao.insert(favoriteCompanies)
-    }
 
-    suspend fun delete(favoriteCompanies: FavoriteCompanies) {
-        companyDao.delete(favoriteCompanies)
-    }
-
+    suspend fun deleteAllFavorite() =
+        companyDao.deleteAllCompanies()
 }
+

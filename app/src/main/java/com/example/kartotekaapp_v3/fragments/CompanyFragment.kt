@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.kartotekaapp_v3.R
 import com.example.kartotekaapp_v3.data.Company
 import com.example.kartotekaapp_v3.databinding.FragmentCompanyBinding
 import com.example.kartotekaapp_v3.network.CompanyApi
-import com.example.kartotekaapp_v3.room.CompanyDatabase
 import com.example.kartotekaapp_v3.room.FavoriteCompanies
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +22,7 @@ import retrofit2.Response
 class CompanyFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var binding: FragmentCompanyBinding
+    private lateinit var viewModel: CompanyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +57,17 @@ class CompanyFragment : Fragment() {
                 Log.d("mylog", "onFailure : ${t?.message}")
             }
         })
+        viewModel = ViewModelProvider(this).get(CompanyViewModel::class.java)
 
         binding.btnSave.setOnClickListener {
-            val newFavoriteCompany = FavoriteCompanies(null,
-            binding.tvCompanyName.text.toString(),
-            binding.tvUNP.text.toString()
-            )
-            navController.navigate(R.id.action_searchFragment_to_companyListFragment)
+            val companyName = binding.tvCompanyName.text.toString()
+            val companyId = binding.tvUNP.text.toString()
+
+            viewModel.addCompany(favoriteCompanies = FavoriteCompanies(null, companyName, companyId))
+
+            Toast.makeText(requireContext(), "Company saved", Toast.LENGTH_SHORT).show()
+
+            navController.navigate(R.id.action_companyFragment_to_companyListFragment)
         }
     }
 

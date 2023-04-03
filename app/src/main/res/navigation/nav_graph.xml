@@ -62,5 +62,12 @@
     <fragment
         android:id="@+id/companyDetailFragment"
         android:name="com.example.kartotekaapp_v3.fragments.CompanyDetailFragment"
-        android:label="CompanyDetailFragment" />
+        android:label="CompanyDetailFragment" >
+        <argument
+            android:name="unp"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_companyDetailFragment_to_companyListFragment"
+            app:destination="@id/companyListFragment" />
+    </fragment>
 </navigation>

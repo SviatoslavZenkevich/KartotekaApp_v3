@@ -8,11 +8,15 @@ import androidx.room.*
 @Dao
 interface CompanyDao {
     @Query("SELECT * FROM companies")
-    fun getAllCompanies(): LiveData<List<FavoriteCompanies>>
+
+    fun readAllData(): LiveData<List<FavoriteCompanies>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favoriteCompanies: FavoriteCompanies)
 
-    @Delete
-    suspend fun delete(favoriteCompanies: FavoriteCompanies)
+    @Query("DELETE * FROM companies WHERE companyId = : companyId")
+    suspend fun delete (companyId : String)
+
+    @Query("DELETE * FROM companies")
+    suspend fun deleteAllCompanies()
 }
